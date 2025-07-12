@@ -31,37 +31,115 @@ uv run mypy .
 
 ## Code Architecture
 
-### Lesson Structure
-All lessons follow the template in `notes/lesson_template.py`:
-- Self-contained Python files with comprehensive docstrings
-- Inline doctests for simple examples
-- Pytest tests for complex scenarios
-- Type hints throughout
-- Executable main() function
+### Lesson Template Structure
+All lessons must follow the exact pattern in `notes/lesson_template.py`:
+
+```python
+#!/usr/bin/env python
+"""
+[Lesson Title].
+
+[Context]
+- State the concept being taught
+- List prerequisites from previous lessons
+- Include references to pytest documentation
+
+[Summary]
+- What the lesson covers
+- What learners will understand after completion
+
+Tests:
+- Doctests for simple examples (<5 lines)
+- Pytest tests for complex examples
+
+Type Hints & Mypy:
+- All functions must have type hints
+- Return types explicitly specified
+
+Execution:
+- Running `python thisfile.py` executes main()
+- Keep examples minimal and self-contained
+"""
+```
+
+Key requirements:
+- **Standard library only** (beyond pytest itself)
+- **Executable files** with `if __name__ == "__main__": main()`
+- **Both doctests and pytest tests** in every lesson
+- **NumPy-style docstrings** with Examples section
+- **Type annotations** for all parameters and returns
 
 ### Project Layout
-- `src/` - Main lesson files organized by chapter
-- `notes/progression.md` - Complete curriculum outline
-- Tests use doctests and pytest, configured to run from `src/`
+```
+src/
+├── chapter_1/           # Intermediate Fixture Mechanics
+├── chapter_2/           # Internals of Fixtures
+├── chapter_3/           # Custom Fixture Factories
+├── chapter_4/           # Hooks and Plugin Architecture
+├── chapter_5/           # Writing Advanced Plugins
+└── chapter_6/           # Contributing to Pytest Core
+```
 
 ### Development Standards
-- **Type Safety**: Mypy strict mode enabled - all code must be fully typed
-- **Documentation**: NumPy-style docstrings required
-- **Testing**: Both doctests and pytest tests expected
-- **Linting**: Comprehensive ruff rules enforce code quality
+- **Type Safety**: Mypy strict mode - all code must be fully typed
+- **Documentation**: NumPy-style docstrings with Context, Summary, Examples sections
+- **Testing**: Doctests for simple demos, pytest for complex scenarios
+- **Linting**: Comprehensive ruff rules (pycodestyle, pyflakes, isort, pydocstyle)
 
-## Pytest Internals Focus
+## 6-Chapter Curriculum Flow
 
-When working on lessons:
-1. Focus on pytest's internal architecture, not just usage
-2. Examples should demonstrate internal mechanisms like FixtureManager, FixtureRequest, hooks
-3. Use only standard library + pytest to keep focus clear
-4. Each lesson builds on previous knowledge - check progression.md
+### Chapter 1: Intermediate Fixture Mechanics
+- Fixture scopes and lifecycle
+- Autouse fixtures
+- Advanced parameterization
+- Yield fixtures and teardown
+
+### Chapter 2: Internals of Fixtures
+- `FixtureManager` and `FixtureDef` classes
+- `FixtureRequest` and request context
+- Dependency resolution (fixture DAG)
+- Fixture lifecycle and caching
+
+### Chapter 3: Custom Fixture Factories
+- Factory-style fixtures (returning callables)
+- Dynamic fixture generation
+- Fixture composition patterns
+- Performance optimization
+
+### Chapter 4: Hooks and Plugin Architecture
+- Hook mechanism overview
+- Lifecycle hooks (configure, session, teardown)
+- Implementing hook functions
+- Conftest vs. external plugins
+
+### Chapter 5: Writing Advanced Plugins
+- Plugin structure and registration
+- Implementing fixtures, CLI options, hooks
+- Testing and maintaining plugins
+- Distribution and community
+
+### Chapter 6: Contributing to Pytest Core
+- Pytest codebase structure
+- Development environment setup
+- Contribution guidelines
+- Understanding core decisions
 
 ## Creating New Lessons
 
 1. Copy `notes/lesson_template.py` as starting point
-2. Follow the 6-chapter progression outlined in `notes/progression.md`
-3. Ensure all examples are runnable and educational
-4. Include both simple (doctest) and complex (pytest) examples
-5. Verify with: `uv run pytest <lesson_file>` and `uv run mypy <lesson_file>`
+2. Place in appropriate chapter directory under `src/`
+3. Follow the exact docstring format from template
+4. Demonstrate pytest internals, not just usage:
+   - Show internal classes (`FixtureManager`, `FixtureRequest`, etc.)
+   - Explain how pytest mechanisms work under the hood
+   - Use introspection to reveal internal state
+5. Testing approach:
+   - Doctests in docstrings for simple examples (<5 lines)
+   - Pytest tests for complex scenarios
+   - All examples must be executable
+6. Verify lesson quality:
+   ```bash
+   uv run pytest src/chapter_X/lesson_Y.py
+   uv run mypy src/chapter_X/lesson_Y.py
+   uv run ruff check src/chapter_X/lesson_Y.py
+   ```
