@@ -6,6 +6,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 This is an educational project teaching experienced Python developers the deep internals of pytest. The focus is on advanced topics like fixtures, hooks, and plugin development through a structured 6-chapter curriculum.
 
+**Important**: This is a learning resource focused on pytest internals, not just usage. All lessons should demonstrate internal mechanisms and show how pytest works under the hood.
+
 ## Key Commands
 
 ```bash
@@ -68,6 +70,8 @@ Key requirements:
 - **Both doctests and pytest tests** in every lesson
 - **NumPy-style docstrings** with Examples section
 - **Type annotations** for all parameters and returns
+- **Self-contained examples** that can be understood without external context
+- **Educational focus** on clarity over complexity
 
 ### Project Layout
 ```
@@ -143,3 +147,19 @@ src/
    uv run mypy src/chapter_X/lesson_Y.py
    uv run ruff check src/chapter_X/lesson_Y.py
    ```
+
+## Important Patterns from Template
+
+The lesson template (`notes/lesson_template.py`) uses asyncio as an example but should be adapted for pytest internals:
+- Replace asyncio examples with pytest internal demonstrations
+- Keep the same structure: demonstrate_concept() and main() functions
+- Ensure doctests work with pytest's output
+- Use minimal delays/sleeps only if needed for timing demonstrations
+
+## Common Development Tasks
+
+When working on lessons:
+1. **Focus on internals**: Use `_pytest` modules and internal APIs to show how things work
+2. **Progressive learning**: Each lesson builds on previous ones - check dependencies
+3. **Practical examples**: Show real-world use cases for internal knowledge
+4. **Performance considerations**: Discuss memory usage and efficiency of different approaches
