@@ -174,8 +174,6 @@ why: Explanation of necessity or impact.
 what:
 - Specific technical changes made
 - Focused on a single topic
-
-refs: #issue-number, breaking changes, or relevant links
 ```
 
 ### Common Commit Types
@@ -202,8 +200,6 @@ what:
 - Add color filter parameter to fruits query
 - Update resolver to handle color filtering
 - Add tests for color filtering
-
-refs: #42
 ```
 
 #### Bug Fix
@@ -214,8 +210,6 @@ why: Color field was incorrectly marked as required
 what:
 - Change color field to use Optional type
 - Update tests to handle None values
-
-refs: #38
 ```
 
 #### Dependencies Update
