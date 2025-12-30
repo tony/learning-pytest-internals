@@ -90,6 +90,39 @@ src/
 - **Testing**: Doctests for simple demos, pytest for complex scenarios
 - **Linting**: Comprehensive ruff rules (pycodestyle, pyflakes, isort, pydocstyle)
 
+### Doctests
+
+**All functions and methods MUST have working doctests.** Doctests serve as both documentation and tests.
+
+**CRITICAL RULES:**
+- Doctests MUST actually execute - never comment out function calls or similar
+- Doctests MUST NOT be converted to `.. code-block::` as a workaround (code-blocks don't run)
+- If you cannot create a working doctest, **STOP and ask for help**
+
+**Available tools for doctests:**
+- `doctest_namespace` fixtures: `tmp_path` (add more via `conftest.py`)
+- Ellipsis for variable output: `# doctest: +ELLIPSIS`
+
+**`# doctest: +SKIP` is NOT permitted** - it's just another workaround that doesn't test anything.
+
+**Example doctest for pytest internals:**
+```python
+>>> import pytest
+>>> from _pytest.fixtures import FixtureDef
+>>> # Demonstrate how pytest creates fixture definitions
+>>> def example_fixture():
+...     return "fixture value"
+>>> hasattr(FixtureDef, 'execute')
+True
+```
+
+**When output varies, use ellipsis:**
+```python
+>>> import pytest
+>>> pytest.__version__  # doctest: +ELLIPSIS
+'...'
+```
+
 ## 6-Chapter Curriculum Flow
 
 ### Chapter 1: Intermediate Fixture Mechanics
