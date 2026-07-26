@@ -64,6 +64,7 @@ import asyncio
 async def demonstrate_concept() -> str:
     """
     [Function Purpose]
+
     Explain what this function does and why it is important for this lesson.
 
     For example:
