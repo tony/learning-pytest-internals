@@ -63,9 +63,9 @@ import asyncio
 
 async def demonstrate_concept() -> str:
     """
-    [Function Purpose].
+    [Describe what this function does, in the imperative mood].
 
-    Explain what this function does and why it is important for this lesson.
+    Explain why it matters for this lesson.
 
     For example:
     This function simulates a short async operation (like an I/O wait)
@@ -84,7 +84,7 @@ async def demonstrate_concept() -> str:
 
 async def main() -> None:
     """
-    Main entrypoint for this lesson.
+    Run this lesson's demonstration.
 
     This orchestrates the demonstration by calling the core function and
     printing the result. In more complex lessons, main might handle multiple
