@@ -90,6 +90,29 @@ src/
 - **Testing**: Doctests for simple demos, pytest for complex scenarios
 - **Linting**: Comprehensive ruff rules (pycodestyle, pyflakes, isort, pydocstyle)
 
+### Classes with fields
+
+**Classes with fields** — `NamedTuple`, dataclasses — document every field in
+an `Attributes` section:
+
+```python
+class HookCall(NamedTuple):
+    """One recorded call into a pytest hook.
+
+    Attributes
+    ----------
+    hook_name : str
+        Hook that fired, e.g. ``pytest_collection_modifyitems``.
+    plugin : str
+        Plugin whose implementation ran.
+    """
+```
+
+A type says how a field is shaped, not what it holds. Describing each one
+keeps that meaning next to the code, and anything that renders the class —
+autodoc, a REPL, an editor tooltip — has a description to show instead of a
+bare name.
+
 ### Doctests
 
 **All functions and methods MUST have working doctests.** Doctests serve as both documentation and tests.
