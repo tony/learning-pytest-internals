@@ -111,9 +111,16 @@ directory does not exist yet, so pytest warns and falls back to a recursive
 search from the repository root. That fallback is how
 `notes/lesson_template.py`'s two doctests run today.
 
-**No ambient names.** There is no `conftest.py` and no `doctest_namespace`
-fixture. A `>>> ` block gets nothing for free — import or define every name it
-uses inside the block itself.
+**Module scope, not block scope.** There is no `conftest.py` and no
+`doctest_namespace` fixture, but a `>>> ` block is not empty either:
+`doctest` runs each doctest against a copy of its own module's namespace,
+so a name imported or defined at module level — like
+`notes/lesson_template.py`'s top-level `import asyncio` — is visible
+inside every doctest in that file without re-importing it. What a block
+does not get for free: state left behind by a *different* doctest (each
+doctest gets its own copy of the module namespace, so a name one `>>> `
+block defines does not survive into another function's doctest) and
+anything defined only in a different module.
 
 **`# doctest: +SKIP` is not permitted.** It tests nothing. If an example
 cannot pass, fix the example or fix the code — never downgrade a doctest to an
